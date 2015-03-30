@@ -1,0 +1,25 @@
+From 58dd1dbe07591eeb1302a1c96ec16afeecff644d Mon Sep 17 00:00:00 2001
+From: Vladimir Ivakin <vladimir_iva@pisem.net>
+Date: Mon, 30 Mar 2015 00:52:36 +0300
+Subject: [PATCH] replace libsystemd-daemon dependency
+
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index ddbdecf..e561337 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -178,7 +178,7 @@ AC_ARG_WITH([systemd-daemon], AS_HELP_STRING([--with-systemd-daemon],
+             [Add support for systemd startup notification (default is autodetected)]),
+             [USE_SYSTEMD_DAEMON=$withval], [USE_SYSTEMD_DAEMON=auto])
+ AS_IF([test "x$USE_SYSTEMD_DAEMON" != "xno"], [
+-    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd-daemon],
++    PKG_CHECK_MODULES([SYSTEMD_DAEMON], [libsystemd],
+         [AC_DEFINE(USE_SYSTEMD_DAEMON,1,[Use systemd startup notification])],
+         [AS_IF([test "x$USE_SYSTEMD_DAEMON" = "xyes"],
+             [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd-daemon not found.])]
+-- 
+2.2.1
+
