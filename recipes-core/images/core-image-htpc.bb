@@ -10,4 +10,4 @@ LICENSE = "MIT"
 
 inherit core-image
 
-IMAGE_INSTALL_append = " packagegroup-mediacenter packagegroup-core-x11-xserver dropbear jfsutils xorg-launch-helper xserver-xorg-module-libwfb"
+IMAGE_INSTALL_append = " packagegroup-mediacenter packagegroup-core-x11-xserver dropbear jfsutils udevil xorg-launch-helper xserver-xorg-module-libwfb"
