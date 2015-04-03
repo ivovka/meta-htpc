@@ -1,7 +1,8 @@
 PNBLACKLIST[xbmc] = ""
-
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Helix \
            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
+           file://0001-udev-storage-provider-fix-std-string.patch \
 "
 SRCREV = "ad747d9f57299f70e37089924c16c382451bfd8a"
 PV = "14.0+gitr${SRCPV}"

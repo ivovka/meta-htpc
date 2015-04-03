@@ -11,6 +11,7 @@ RDEPENDS_${PN} = "\
     vdr \
     vdr-plugin-dvbapi \
     vdr-plugin-xvdr \
+    vdr-plugin-iptv \
     lirc-modules \
     lirc \
     libvdpau \
