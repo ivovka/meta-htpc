@@ -23,9 +23,10 @@ FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -
 BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
 
 EXTRA_FFCONF_armv7a = "--cpu=cortex-a8"
+EXTRA_FFCONF_ion330 = "--cpu=atom"
 EXTRA_FFCONF ?= ""
 
-PACKAGECONFIG ??= "bzip2 x264 theora ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+PACKAGECONFIG ??= "bzip2 x264 theora libvorbis ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
 PACKAGECONFIG[bzip2] = "--enable-bzlib,--disable-bzlib,bzip2"
 PACKAGECONFIG[faac] = "--enable-libfaac,--disable-libfaac,faac"
 PACKAGECONFIG[gsm] = "--enable-libgsm,--disable-libgsm,libgsm"
@@ -46,7 +47,7 @@ USE_NONFREE = "${@bb.utils.contains_any('PACKAGECONFIG', [ 'faac', 'openssl' ], 
 EXTRA_OECONF = " \
     --disable-devices \
     --disable-ffplay \
-    --disable-ffmpeg \
+    --enable-ffmpeg \
     --disable-ffprobe \
     --disable-ffserver \
     --disable-doc \
@@ -81,7 +82,8 @@ do_configure() {
 }
 
 do_install_append() {
-    install -m 0644 ${S}/libavfilter/*.h ${D}${includedir}/libavfilter/
+    install -m 0644 "${S}/libavfilter/"*.h "${D}${includedir}/libavfilter/"
+    rm -rf "${D}/${datadir}"
 }
 
 FFMPEG_LIBS = "libavcodec libavdevice libavformat \
