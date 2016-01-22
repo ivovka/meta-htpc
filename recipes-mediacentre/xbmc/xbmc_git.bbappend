@@ -29,6 +29,7 @@ B = "${S}"
 DEPENDS = "gperf-native cmake-native zip-native curl libmodplug mpeg2dec fribidi boost libtinyxml zlib sqlite3 libpcre jasper libpng libass libvorbis tiff lzo openssl yajl libxml2 libxslt freetype taglib libdrm libxrandr virtual/libsdl ffmpeg libcdio python"
 #DEPENDS = "libusb1 libcec libplist expat yajl libxmu ffmpeg samba fontconfig python libass libmicrohttpd wavpack libmms libsdl-image libsdl-mixer virtual/egl mysql5 libmms faad2 libcdio lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl libmad"
 
+RDEPENDS_{PN} += "python-threading python-shell python-compression python-imaging"
 #--boost
 #
 #--boost
