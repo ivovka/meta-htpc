@@ -3,6 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Helix \
            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
            file://0001-udev-storage-provider-fix-std-string.patch \
+	   file://0009-lib-cximage-6.0-fix-compilation-with-gcc6.patch \
 "
 SRCREV = "ad747d9f57299f70e37089924c16c382451bfd8a"
 PV = "14.0+gitr${SRCPV}"
@@ -26,7 +27,7 @@ CACHED_CONFIGUREVARS += " \
 
 B = "${S}"
 
-DEPENDS = "gperf-native cmake-native zip-native curl libmodplug mpeg2dec fribidi boost libtinyxml zlib sqlite3 libpcre jasper libpng libass libvorbis tiff lzo openssl yajl libxml2 libxslt freetype taglib libdrm libxrandr virtual/libsdl ffmpeg libcdio python"
+DEPENDS = "gperf-native cmake-native zip-native swig-native libsdl-native libsdl-image-native curl libmodplug mpeg2dec fribidi boost libtinyxml zlib sqlite3 libpcre jasper libpng libass libvorbis tiff lzo openssl yajl libxml2 libxslt freetype taglib libdrm libxrandr virtual/libsdl ffmpeg libcdio python"
 #DEPENDS = "libusb1 libcec libplist expat yajl libxmu ffmpeg samba fontconfig python libass libmicrohttpd wavpack libmms libsdl-image libsdl-mixer virtual/egl mysql5 libmms faad2 libcdio lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl libmad"
 
 RDEPENDS_{PN} += "python-threading python-shell python-compression python-imaging"
@@ -112,6 +113,7 @@ EXTRA_OECONF_append = " \
     --disable-joystick \
     --with-ffmpeg=shared \
     "
+CFLAGS += "-fgnu89-inline"
 RRECOMMENDS_${PN} = ""
 RRECOMMENDS_${PN}_remove = "libcec mesa-demos"
 RRECOMMENDS_${PN}_append = " python-json \
@@ -119,5 +121,11 @@ RRECOMMENDS_${PN}_append = " python-json \
 RRECOMMENDS_${PN}_libc-glibc = ""
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-utf-8 glibc-gconv-unicode glibc-gconv-utf-32"
 
-FILES_${PN}_append = " ${datadir}/kodi ${libdir}/kodi/*"
+PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-doc ${PN}"
+
+FILES_${PN} += " ${datadir}/kodi ${libdir}/kodi ${libdir}/kodi/*"
+FILES_${PN}_remove = "${libdir}/${BPN}/*"
 FILES_${PN}-dbg_append = " ${libdir}/kodi/.debug ${libdir}/kodi/addons/*/.debug ${libdir}/kodi/system/.debug ${libdir}/kodi/system/players/*/.debug"
+#FILES_${PN}-staticdev = " ${libdir}/kodi/*.a"
+FILES_${PN}-dev = "${includedir}"
+FILES_${PN}-doc = "${docdir}"
