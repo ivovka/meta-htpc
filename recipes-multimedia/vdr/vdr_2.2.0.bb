@@ -12,10 +12,13 @@ S = "${WORKDIR}/${PN}-${PV}"
 
 DEPENDS = "fontconfig freetype gettext-native libcap jpeg ncurses"
 
+inherit pkgconfig
+
 EXTRA_OEMAKE = "'CONFDIR=/etc/vdr' 'VIDEODIR=${datadir}/vdr/video'"
 
 do_install () {
   oe_runmake install DESTDIR=${D} PREFIX="/usr" CONFDIR="/etc/vdr" VIDEODIR="${datadir}/vdr/video"
+  sed -i 's/-fdebug-prefix-map[^ ]*//g; s#${STAGING_DIR_TARGET}##g' ${D}${libdir}/pkgconfig/*.pc
 }
 
 PACKAGES_DYNAMIC += "^vdr-plugin-.*"
