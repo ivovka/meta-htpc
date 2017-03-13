@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http"
-SRCREV = "10631"
+SRCREV = "11378"
 SRC_URI_append = " file://oscam.service \
       "
 inherit systemd
