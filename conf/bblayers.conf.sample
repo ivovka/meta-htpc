@@ -1,0 +1,17 @@
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /home/vivakin/projects/tools/yocto/poky/meta \
+  /home/vivakin/projects/tools/yocto/poky/meta-poky \
+  /home/vivakin/projects/tools/yocto/poky/meta-yocto-bsp \
+  /home/vivakin/projects/htpc/meta-htpc \
+  /home/vivakin/projects/htpc/meta-ion330 \
+  /home/vivakin/projects/tools/yocto/meta-intel \
+  /home/vivakin/projects/tools/yocto/meta-openembedded/meta-oe \
+  /home/vivakin/projects/tools/yocto/meta-openembedded/meta-multimedia \
+  "
