@@ -3,15 +3,15 @@ HOMEPAGE = "http://www.transmissionbt.com/"
 LICENSE = "GPL-2.0"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=a1923fe8f8ff37c33665716af0ec84f1"
-SRC_URI = "https://transmission.cachefly.net/transmission-2.84.tar.xz \
+SRC_URI = "https://transmission.cachefly.net/transmission-${PV}.tar.xz \
     file://0001-replace-libsystemd-daemon-dependency.patch"
 
-SRC_URI[md5sum] = "411aec1c418c14f6765710d89743ae42"
-SRC_URI[sha256sum] = "a9fc1936b4ee414acc732ada04e84339d6755cd0d097bcbd11ba2cfc540db9eb"
+SRC_URI[md5sum] = "3fce404a436e3cd7fde80fb6ed61c264"
+SRC_URI[sha256sum] = "3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f"
 
 inherit autotools systemd useradd
 DEPENDS = "zlib openssl curl libevent"
-PACKAGECONFIG = "utp daemon ${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+PACKAGECONFIG = "utp daemon ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
 PACKAGECONFIG[utp] = "--enable-utp,--disable-utp"
 PACKAGECONFIG[daemon] = "--enable-daemon,--disable-daemon"
 PACKAGECONFIG[systemd] = "--with-systemd-daemon,--without-systemd-daemon,systemd"
