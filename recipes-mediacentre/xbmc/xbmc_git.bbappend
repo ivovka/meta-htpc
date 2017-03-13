@@ -4,6 +4,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Helix \
            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
            file://0001-udev-storage-provider-fix-std-string.patch \
 	   file://0009-lib-cximage-6.0-fix-compilation-with-gcc6.patch \
+	   file://0010-projectM-fix-compilation-with-gcc6.patch \
 "
 SRCREV = "ad747d9f57299f70e37089924c16c382451bfd8a"
 PV = "14.0+gitr${SRCPV}"
