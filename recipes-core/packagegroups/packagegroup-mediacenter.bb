@@ -12,8 +12,7 @@ RDEPENDS_${PN} = "\
     vdr-plugin-dvbapi \
     vdr-plugin-xvdr \
     vdr-plugin-iptv \
-    lirc-modules \
-    lirc \
+    v4l-utils \
     libvdpau \
     xbmc \
     xbmc-addon-xvdr \
