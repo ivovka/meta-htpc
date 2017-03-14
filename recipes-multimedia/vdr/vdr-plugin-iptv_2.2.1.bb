@@ -4,14 +4,11 @@ LICENSE = "GPL-2.0"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
 
-SRC_URI = "http://www.saunalahti.fi/~rahrenbe/vdr/iptv/files/vdr-iptv-2.2.0.tgz \
+SRC_URI = "http://www.saunalahti.fi/~rahrenbe/vdr/iptv/files/vdr-iptv-${PV}.tgz \
     file://0001-vdr-plugin-iptv-gcc6-build.patch \
     "
-SRC_URI[md5sum] = "d29cf830d16d65592c06a1adfe351456"
-SRC_URI[sha256sum] = "6b0e52a060a26dda5b683ad34a53a0fcf63e5b6de429ef7f18f7c38dd08d647e"
-
-PV = "2.2.0"
-PR = "r0"
+SRC_URI[md5sum] = "318d58e097895789b18a07cac46dfd1c"
+SRC_URI[sha256sum] = "db9e397ed8c229f42ab71daea096c7ac66997905901639a767de193633854da2"
 
 S = "${WORKDIR}/iptv-${PV}"
 
