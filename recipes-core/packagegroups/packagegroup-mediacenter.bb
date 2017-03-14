@@ -10,7 +10,7 @@ inherit packagegroup
 RDEPENDS_${PN} = "\
     vdr \
     vdr-plugin-dvbapi \
-    vdr-plugin-xvdr \
+    vdr-plugin-vnsiserver \
     vdr-plugin-iptv \
     v4l-utils \
     libvdpau \
