@@ -1,4 +1,4 @@
-SUMMARY = "VDR plugin to handle XBMC clients."
+SUMMARY = "VDR plugin to handle kodi clients."
 HOMEPAGE = "https://github.com/FernetMenta/vdr-plugin-vnsiserver"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"

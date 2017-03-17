@@ -14,7 +14,7 @@ RDEPENDS_${PN} = "\
     vdr-plugin-iptv \
     v4l-utils \
     libvdpau \
-    xbmc \
+    kodi \
     xbmc-addon-xvdr \
     oscam"
 

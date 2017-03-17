@@ -1,5 +1,5 @@
 DESCRIPTION = "Image for htpc build. Must include X11 without window manager, \
-vdr and xbmc"
+vdr and kodi"
 
 IMAGE_FEATURES += "package-management"
 IMAGE_LINGUAS = "en-us ru-ru"
