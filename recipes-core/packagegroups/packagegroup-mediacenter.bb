@@ -15,6 +15,6 @@ RDEPENDS_${PN} = "\
     v4l-utils \
     libvdpau \
     kodi \
-    xbmc-addon-xvdr \
+    kodi-addon-vnsi \
     oscam"
 
