@@ -33,7 +33,6 @@ DEPENDS = " \
   yasm-native \
   zip-native \
   alsa-lib \
-  boost \
   bzip2 \
   crossguid \
   curl \
