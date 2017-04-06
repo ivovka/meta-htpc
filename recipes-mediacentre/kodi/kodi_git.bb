@@ -1,5 +1,7 @@
 include kodi.inc
 FILESPATH =. "${FILE_DIRNAME}/files:"
+SRC_URI_append = " file://0100-dlldvdnav-no-win32.patch \
+  "
 
 inherit cmake gettext pythonnative
 S = "${WORKDIR}/git"
@@ -65,17 +67,18 @@ DEPENDS = " \
   "
 
 PROVIDES = "xbmc"
-PACKAGECONFIG ??= " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)} opengl"
+PACKAGECONFIG ??= " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)} opengl dbus"
 PACKAGECONFIG_append_ion330 = " vdpau"
 
 PACKAGECONFIG[opengl] = "-DENABLE_OPENGL=ON -DENABLE_OPENGLES=OFF,-DENABLE_OPENGL=OFF -DENABLE_OPENGLES=ON,virtual/libgl"
 PACKAGECONFIG[openglesv2] = "-DENABLE_OPENGL=OFF -DENABLE_OPENGLES=ON,-DENABLE_OPENGL=ON -DENABLE_OPENGLES=OFF,virtual/egl"
 PACKAGECONFIG[vaapi] = "-DENABLE_VAAPI=ON,-DENABLE_VAAPI=OFF,libva"
-PACKAGECONFIG[vdpau] = "-DENABLE_VDPAU=ON,-DENABLE_VDPAU=OFF,libvdpau"
+PACKAGECONFIG[vdpau] = "-DENABLE_VDPAU=ON,-DENABLE_VDPAU=OFF,virtual/libvdpau"
 PACKAGECONFIG[mysql] = "-DENABLE_MYSQLCLIENT=ON,-DENABLE_MYSQLCIENT=OFF,mysql5"
 PACKAGECONFIG[x11] = "-DENABLE_X11=ON,-DENABLE_X11=OFF,libxinerama libxmu libxrandr libxtst"
 PACKAGECONFIG[pulseaudio] = "-DENABLE_PULSEAUDIO=ON,-DENABLE_PULSEAUDIO=OFF,pulseaudio"
 PACKAGECONFIG[lcms] = "-DENABLE_LCMS2=ON,-DENABLE_LCMS2=OFF,lcms"
+PACKAGECONFIG[dbus] = ",,dbus"
 
 # To find Java
 OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
