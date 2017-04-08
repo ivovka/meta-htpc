@@ -16,5 +16,7 @@ RDEPENDS_${PN} = "\
     libvdpau \
     kodi \
     kodi-addon-vnsi \
-    oscam"
+    oscam \
+    ir-keytable \
+  "
 
