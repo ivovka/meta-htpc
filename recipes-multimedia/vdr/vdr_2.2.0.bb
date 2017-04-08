@@ -29,3 +29,5 @@ python populate_packages_prepend () {
     do_split_packages(d, vdr_libdir, '^libvdr-(.*)\.so\.${PV}$', 'vdr-plugin-%s', 'VDR Plugin %s', extra_depends='', prepend=True)
 }
 
+RDEPENDS_${PN} += " glibc-charmap-iso-8859-5 glibc-gconv-iso8859-5"
+
