@@ -48,6 +48,7 @@ DEPENDS = " \
   libcdio \
   libdrm \
   libdvdnav \
+  libmicrohttpd \
   libmodplug \
   libpcre \
   libpng \
@@ -87,7 +88,6 @@ EXTRA_OECMAKE_append = " \
   -DNATIVEPREFIX=${STAGING_DIR_NATIVE}${prefix_native} \
   -DWITH_ARCH=${TARGET_ARCH} \
   -DENABLE_SDL=OFF \
-  -DENABLE_MICROHTTPD=OFF \
   -DENABLE_CEC=OFF \
   -DENABLE_SSH=OFF \
   -DENABLE_SMBCLIENT=OFF \
