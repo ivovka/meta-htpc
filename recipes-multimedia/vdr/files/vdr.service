@@ -1,0 +1,12 @@
+[Unit]
+Description=Video Disk Recorder
+After=oscam.service
+
+[Service]
+Environment="LANG=en_US"
+ExecStart=/usr/bin/vdr -L/usr/lib/vdr --localedir=/usr/share/locale --video=/home/media/recordings -P dvbapi -P vnsiserver --no-kbd --chartab ISO-8859-5
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
