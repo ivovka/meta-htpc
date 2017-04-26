@@ -1,5 +1,5 @@
 DESCRIPTION = "Image for htpc build. Must include X11 without window manager, \
-vdr and xbmc"
+vdr and kodi"
 
 IMAGE_FEATURES += "package-management"
 IMAGE_LINGUAS = "en-us ru-ru"
@@ -10,4 +10,4 @@ LICENSE = "MIT"
 
 inherit core-image
 
-IMAGE_INSTALL_append = " packagegroup-mediacenter packagegroup-core-x11-xserver dropbear jfsutils udevil xorg-launch-helper xserver-xorg-module-libwfb"
+IMAGE_INSTALL_append = " packagegroup-mediacenter packagegroup-core-x11-xserver dropbear jfsutils udevil xorg-launch-helper xserver-xorg-module-libwfb tzdata"

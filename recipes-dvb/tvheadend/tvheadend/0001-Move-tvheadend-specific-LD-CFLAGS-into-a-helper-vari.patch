@@ -1,0 +1,127 @@
+diff --git a/Makefile b/Makefile
+index 10d98cc73..1b9da152d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -29,49 +29,49 @@ LANGUAGES ?= $(LANGUAGES_ALL)
+ # Common compiler flags
+ #
+ 
+-CFLAGS  += -g
++TVH_CFLAGS  += -g
+ ifeq ($(CONFIG_CCDEBUG),yes)
+-CFLAGS  += -O0
++TVH_CFLAGS  += -O0
+ else
+-CFLAGS  += -O2
++TVH_CFLAGS  += -O2
+ endif
+ ifeq ($(CONFIG_PIE),yes)
+-CFLAGS  += -fPIE
++TVH_CFLAGS  += -fPIE
+ else
+-CFLAGS  += -fPIC
++TVH_CFLAGS  += -fPIC
+ endif
+ ifeq ($(CONFIG_W_UNUSED_RESULT),yes)
+-CFLAGS  += -Wunused-result
++TVH_CFLAGS  += -Wunused-result
+ endif
+ ifneq ($(CFLAGS_NO_WERROR),yes)
+-CFLAGS  += -Werror
++TVH_CFLAGS  += -Werror
+ endif
+-CFLAGS  += -Wall -Wwrite-strings -Wno-deprecated-declarations
+-CFLAGS  += -Wmissing-prototypes
+-CFLAGS  += -fms-extensions -funsigned-char -fno-strict-aliasing
+-CFLAGS  += -D_FILE_OFFSET_BITS=64
+-CFLAGS  += -I${BUILDDIR} -I${ROOTDIR}/src -I${ROOTDIR}
++TVH_CFLAGS  += -Wall -Wwrite-strings -Wno-deprecated-declarations
++TVH_CFLAGS  += -Wmissing-prototypes
++TVH_CFLAGS  += -fms-extensions -funsigned-char -fno-strict-aliasing
++TVH_CFLAGS  += -D_FILE_OFFSET_BITS=64
++TVH_CFLAGS  += -I${BUILDDIR} -I${ROOTDIR}/src -I${ROOTDIR}
+ ifeq ($(CONFIG_ANDROID),yes)
+-LDFLAGS += -ldl -lm
++TVH_LDFLAGS += -ldl -lm
+ else
+-LDFLAGS += -ldl -lpthread -lm
++TVH_LDFLAGS += -ldl -lpthread -lm
+ endif
+-LDFLAGS += -pie -Wl,-z,now
++TVH_LDFLAGS += -pie -Wl,-z,now
+ ifeq ($(CONFIG_LIBICONV),yes)
+-LDFLAGS += -liconv
++TVH_LDFLAGS += -liconv
+ endif
+ ifeq ($(PLATFORM), darwin)
+-LDFLAGS += -framework CoreServices
++TVH_LDFLAGS += -framework CoreServices
+ else
+ ifeq ($(CONFIG_ANDROID),no)
+-LDFLAGS += -lrt
++TVH_LDFLAGS += -lrt
+ endif
+ endif
+ 
+ ifeq ($(COMPILER), clang)
+-CFLAGS  += -Wno-microsoft -Qunused-arguments -Wno-unused-function
+-CFLAGS  += -Wno-unused-value -Wno-tautological-constant-out-of-range-compare
+-CFLAGS  += -Wno-parentheses-equality -Wno-incompatible-pointer-types
++TVH_CFLAGS  += -Wno-microsoft -Qunused-arguments -Wno-unused-function
++TVH_CFLAGS  += -Wno-unused-value -Wno-tautological-constant-out-of-range-compare
++TVH_CFLAGS  += -Wno-parentheses-equality -Wno-incompatible-pointer-types
+ endif
+ 
+ 
+@@ -531,8 +531,8 @@ SRCS-yes += src/descrambler/ffdecsa/ffdecsa_interface.c \
+ 	src/descrambler/ffdecsa/ffdecsa_int.c
+ SRCS-${CONFIG_MMX}  += src/descrambler/ffdecsa/ffdecsa_mmx.c
+ SRCS-${CONFIG_SSE2} += src/descrambler/ffdecsa/ffdecsa_sse2.c
+-${BUILDDIR}/src/descrambler/ffdecsa/ffdecsa_mmx.o  : CFLAGS += -mmmx
+-${BUILDDIR}/src/descrambler/ffdecsa/ffdecsa_sse2.o : CFLAGS += -msse2
++${BUILDDIR}/src/descrambler/ffdecsa/ffdecsa_mmx.o  : TVH_CFLAGS += -mmmx
++${BUILDDIR}/src/descrambler/ffdecsa/ffdecsa_sse2.o : TVH_CFLAGS += -msse2
+ endif
+ 
+ # libaesdec
+@@ -621,12 +621,12 @@ reconfigure:
+ 
+ # Binary
+ ${PROG}: .config.mk make_webui $(OBJS)
+-	$(pCC) -o $@ $(OBJS) $(CFLAGS) $(LDFLAGS)
++	$(pCC) -o $@ $(OBJS) $(TVH_CFLAGS) $(TVH_LDFLAGS) $(CFLAGS) $(LDFLAGS)
+ 
+ # Object
+ ${BUILDDIR}/%.o: %.c
+ 	@mkdir -p $(dir $@)
+-	$(pCC) -MD -MP $(CFLAGS) -c -o $@ $<
++	$(pCC) -MD -MP $(TVH_CFLAGS) $(CFLAGS) -c -o $@ $<
+ 
+ # Add-on
+ ${BUILDDIR}/%.so: ${SRCS_EXTRA}
+diff --git a/support/configure.inc b/support/configure.inc
+index 42b6af856..71c2c6bdd 100755
+--- a/support/configure.inc
++++ b/support/configure.inc
+@@ -488,8 +488,8 @@ BZIP2    ?= ${BZIP2}
+ XGETTEXT ?= ${XGETTEXT}
+ MSGMERGE ?= ${MSGMERGE}
+ PKG_CONFIG ?= ${PKG_CONFIG}
+-CFLAGS   += ${CFLAGS}
+-LDFLAGS  += ${LDFLAGS}
++TVH_CFLAGS   += ${CFLAGS}
++TVH_LDFLAGS  += ${LDFLAGS}
+ prefix    = ${prefix}
+ bindir    = ${bindir}
+ mandir    = ${mandir}
+@@ -516,8 +516,8 @@ EOF
+   # Add package config
+   for pkg in ${PACKAGES[*]}; do
+     cat >>"${CONFIG_MK}" <<EOF
+-LDFLAGS += $(${PKG_CONFIG} --libs $pkg)
+-CFLAGS  += $(${PKG_CONFIG} --cflags $pkg)
++TVH_LDFLAGS += $(${PKG_CONFIG} --libs $pkg)
++TVH_CFLAGS  += $(${PKG_CONFIG} --cflags $pkg)
+ EOF
+   done
+ 

@@ -1,0 +1,13 @@
+diff --git a/xorg.service.in b/xorg.service.in
+index 6ee5ce0..3481af3 100644
+--- a/xorg.service.in
++++ b/xorg.service.in
+@@ -17,7 +17,7 @@ Before=xorg.target
+ 
+ [Service]
+ Type=notify
+-ExecStart=@prefix@/bin/xorg-launch-helper :0 -nolisten tcp -noreset vt1
++ExecStart=@prefix@/bin/xorg-launch-helper :0 -nolisten tcp -noreset vt05
+ Restart=always
+ RestartSec=10
+ 

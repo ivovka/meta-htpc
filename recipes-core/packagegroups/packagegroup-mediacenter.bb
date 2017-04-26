@@ -10,12 +10,13 @@ inherit packagegroup
 RDEPENDS_${PN} = "\
     vdr \
     vdr-plugin-dvbapi \
-    vdr-plugin-xvdr \
+    vdr-plugin-vnsiserver \
     vdr-plugin-iptv \
-    lirc-modules \
-    lirc \
+    v4l-utils \
     libvdpau \
-    xbmc \
-    xbmc-addon-xvdr \
-    oscam"
+    kodi \
+    kodi-addon-vnsi \
+    oscam \
+    ir-keytable \
+  "
 
