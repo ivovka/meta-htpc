@@ -1,9 +1,10 @@
 include kodi.inc
 FILESPATH =. "${FILE_DIRNAME}/files:"
 SRC_URI_append = " file://0100-dlldvdnav-no-win32.patch \
+  file://kodi.service \
   "
 
-inherit cmake gettext pythonnative
+inherit cmake gettext pythonnative systemd
 S = "${WORKDIR}/git"
 OECMAKE_SOURCEPATH = "${S}/project/cmake"
 
@@ -83,10 +84,11 @@ PACKAGECONFIG[dbus] = ",,dbus"
 
 # To find Java
 OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
+#  -DWITH_ARCH=${TARGET_ARCH} \#
 
 EXTRA_OECMAKE_append = " \
   -DNATIVEPREFIX=${STAGING_DIR_NATIVE}${prefix_native} \
-  -DWITH_ARCH=${TARGET_ARCH} \
+  -DWITH_CPU=${TARGET_ARCH} \
   -DENABLE_SDL=OFF \
   -DENABLE_CEC=OFF \
   -DENABLE_SSH=OFF \
@@ -112,6 +114,13 @@ def enable_glew(bb, d):
         return "glew"
     return ""
 
+do_install_append() {
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/kodi.service ${D}${systemd_unitdir}/system/kodi.service
+    fi
+}
+
 INSANE_SKIP_${PN} = "already-stripped"
 
 FILES_${PN} += "${datadir}/xsessions ${datadir}/icons ${libdir}/xbmc ${datadir}/xbmc"
@@ -133,3 +142,5 @@ RRECOMMENDS_${PN}_append = " \
   "
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-utf-8 glibc-gconv-unicode glibc-gconv-utf-32"
 RPROVIDES_${PN} += "xbmc"
+
+SYSTEMD_SERVICE_${PN} = "kodi.service"
