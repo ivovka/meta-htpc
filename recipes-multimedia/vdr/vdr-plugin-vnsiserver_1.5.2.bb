@@ -8,7 +8,8 @@ SRC_URI[sha256sum] = ""
 SRCREV = "41e62a56febd0b59acf1c29f022d1d130e7af855"
 S = "${WORKDIR}/git"
 
-DEPENDS = "vdr"
+DEPENDS = "vdr gettext-native"
+inherit pkgconfig
 
 do_install () {
   oe_runmake install DESTDIR=${D}

@@ -13,7 +13,9 @@ PR = "r0"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "vdr"
+DEPENDS = "vdr gettext-native"
+
+inherit pkgconfig
 
 do_install () {
   oe_runmake install DESTDIR=${D}

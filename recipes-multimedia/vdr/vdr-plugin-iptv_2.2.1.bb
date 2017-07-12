@@ -12,7 +12,9 @@ SRC_URI[sha256sum] = "db9e397ed8c229f42ab71daea096c7ac66997905901639a767de193633
 
 S = "${WORKDIR}/iptv-${PV}"
 
-DEPENDS = "vdr curl"
+DEPENDS = "vdr curl gettext-native"
+
+inherit pkgconfig
 
 do_install () {
   oe_runmake install DESTDIR=${D}
