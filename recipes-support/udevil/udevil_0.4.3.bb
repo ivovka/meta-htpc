@@ -12,7 +12,7 @@ SRC_URI[md5sum] = "51b70af0d3d16575d41c910db3a2f099"
 SRC_URI[sha256sum] = "446bbbd810d8379599f5aff3b94a19a617d7c84775b7f34a03c21f58835c3b76"
 
 inherit autotools gettext pkgconfig systemd
-DEPENDS = "glib-2.0 udev intltool-native"
+DEPENDS = "glib-2.0 udev intltool-native glib-2.0-native"
 #PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
 #PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 EXTRA_OECONF = " \
